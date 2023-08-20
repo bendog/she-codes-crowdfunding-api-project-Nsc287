@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from dateutil.relativedelta import relativedelta
+# from dateutil.relativedelta import relativedelta
 
 # Create your models here.
 
@@ -43,7 +43,8 @@ class Project(models.Model):
     image = models.URLField()
     is_open = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now)
-    deadline = models.DateTimeField(default=timezone.now)
+    # deadline = models.DateTimeField(default=timezone.now)
+    deadline = models.DateTimeField()
     rewards_list= models.JSONField(null=True)
     category = models.ForeignKey(
         Category, 
@@ -59,10 +60,10 @@ class Project(models.Model):
         on_delete=models.CASCADE) 
         # related_name='Idolized_projects', null=True)
 
-    def save(self, *args, **kwargs):  # Override the save method to calculate the deadline
-        if not self.id:
-            self.deadline = self.date_created + relativedelta(months=+6)
-            super(Project, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):  # Override the save method to calculate the deadline
+    #     if not self.id:
+    #         self.deadline = self.date_created + relativedelta(months=+6)
+    #         super(Project, self).save(*args, **kwargs)
 
 class Reward(models.Model):
     project = models.ForeignKey(
