@@ -5,21 +5,21 @@ from django.utils import timezone
 
 # Create your models here.
 
-class Category(models.Model): #category of a project 
-    name = models.CharField(max_length=200, null=True) # Stores the name of the category 
-    slug = models.SlugField(unique=True) # Stores a unique slug for the category
+class Category(models.Model):
+    name = models.CharField(max_length=200, null=True) 
+    slug = models.SlugField(unique=True) 
     
-    def __str__(self): # returns the name of the category as a string
-        return self.name
+    # def __str__(self): # returns the name of the category as a string
+    #     return self.name
 
 class Idol(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, null=True)
     bio = models.TextField(blank=True)
     image = models.URLField()
     
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 class Pledge(models.Model):
     amount = models.IntegerField()
@@ -53,11 +53,11 @@ class Project(models.Model):
     owner = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        related_name='owned_projects'
+        related_name='owned_projects', 
     )
     idol = models.ForeignKey(
         Idol, 
-        on_delete=models.CASCADE) 
+        on_delete=models.CASCADE, null=True) 
         # related_name='Idolized_projects', null=True)
 
     # def save(self, *args, **kwargs):  # Override the save method to calculate the deadline
