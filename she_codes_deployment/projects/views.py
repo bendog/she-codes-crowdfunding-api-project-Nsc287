@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Project, Pledge, Category
-from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, CategorySerializer
+from .models import Project, Pledge, Category, Idol
+from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, CategorySerializer, IdolSerializer
 from django.http import Http404
 from rest_framework import status, permissions
 from .permissions import IsOwnerOrReadOnly
@@ -111,6 +111,25 @@ class CategoryList(APIView):
 
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST)
+    
+class IdolList(APIView):
+
+    def get(self, request):
+        idol = Idol.objects.all()
+        serializer = IdolSerializer(idol, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = IdolSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(
