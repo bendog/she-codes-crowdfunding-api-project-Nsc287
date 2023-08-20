@@ -14,7 +14,7 @@ RUN set -ex && \
     pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt && \
     rm -rf /root/.cache/
-COPY meetmyidol/ /code/
+COPY she_codes_deployment/ /code/
 
 ENV SECRET_KEY "WX5bC6WJP99goMiaWz5bUDevPIW6X9yuqzyikpNM7fY40IH7X9"
 RUN python manage.py collectstatic --noinput
