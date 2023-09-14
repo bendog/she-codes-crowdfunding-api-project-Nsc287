@@ -109,17 +109,17 @@ class CategoryList(APIView):
         serializer = CategorySerializer(category, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
-            )
+    # def post(self, request):
+    #     serializer = CategorySerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(
+    #             serializer.data,
+    #             status=status.HTTP_201_CREATED
+    #         )
 
-        return Response(serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST)
+        # return Response(serializer.errors,
+        #     status=status.HTTP_400_BAD_REQUEST)
     
 class IdolList(APIView):
 

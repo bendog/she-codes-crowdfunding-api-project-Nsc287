@@ -19,7 +19,7 @@ class PledgeSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     category=serializers.ReadOnlyField(source='category.id')
     class Meta:
-        model=Category
+        model = apps.get_model('projects.Category')
         fields='__all__'
 
 class IdolSerializer(serializers.ModelSerializer):
@@ -52,7 +52,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ProjectDetailSerializer(ProjectSerializer):
     pledges=PledgeSerializer(many=True, read_only=True)
     idol=IdolSerializer(many=False, read_only=True)
-    Category=CategorySerializer(many=True, read_only=True)
+    category=CategorySerializer(many=True, read_only=True)
 
 # def update(self, instance, validated_data):
 #     instance.title = validated_data.get('title', instance.title)
