@@ -9,17 +9,12 @@ class Category(models.Model):
     name = models.CharField(max_length=200, null=True) 
     slug = models.SlugField(unique=True) 
     
-    # def __str__(self): # returns the name of the category as a string
-    #     return self.name
 
 class Idol(models.Model):
     name = models.CharField(max_length=200, null=True)
     bio = models.TextField(blank=True)
     image = models.URLField()
     
-
-    # def __str__(self):
-    #     return self.name
 
 class Pledge(models.Model):
     amount = models.IntegerField()
