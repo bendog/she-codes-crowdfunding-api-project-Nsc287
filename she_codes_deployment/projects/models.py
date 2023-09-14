@@ -48,8 +48,8 @@ class Project(models.Model):
     rewards_list= models.JSONField(null=True)
     category = models.ForeignKey(
         Category, 
-        on_delete=models.CASCADE, 
-        related_name='categorized_projects', null=True)
+        on_delete=models.CASCADE, null=True)
+        # related_name='categorized_projects', null=True)
     owner = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
