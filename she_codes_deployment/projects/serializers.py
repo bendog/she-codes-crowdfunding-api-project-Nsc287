@@ -33,14 +33,12 @@ class OwnerSerializer(serializers.ModelSerializer):
     owner=serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
-        model = get_user_model('CustomUser')      
-        fields =  ['usernmae']
+        model = get_user_model()      
+        fields =  ['username']
         
 
 class ProjectSerializer(serializers.ModelSerializer):
-    # category=CategorySerializer() #try to display category as a "string" getting error
-    owner=serializers.ReadOnlyField(source='owner.id')
-    # idol=serializers.ReadOnlyField(source='idol.name')
+    owner=OwnerSerializer(many=False, read_only=True)
     
     class Meta:
         model = apps.get_model('projects.Project')
