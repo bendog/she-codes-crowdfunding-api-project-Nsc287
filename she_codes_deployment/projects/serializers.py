@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.apps import apps
 from .models import Reward, Category, Idol
+from django.contrib.auth import get_user_model
 # from users.serializers import ProjectProfileSerializer, IdolSerializer
 
 # class RewardSerializer(serializers.ModelSerializer):
@@ -16,15 +17,23 @@ class PledgeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
+    category=serializers.ReadOnlyField(source='category.id')
     class Meta:
         model=Category
         fields='__all__'
 
 class IdolSerializer(serializers.ModelSerializer):
-    # idol=serializers.ReadOnlyField(source='idol.name')
+    idol=serializers.ReadOnlyField(source='idol.id')
 
     class Meta:
         model = Idol        #apps.get_model('projects.Idol')
+        fields = '__all__'
+
+class OwnerSerializer(serializers.ModelSerializer):
+    owner=serializers.ReadOnlyField(source='owner.id')
+
+    class Meta:
+        model = get_user_model()      
         fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
