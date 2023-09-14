@@ -34,7 +34,7 @@ class OwnerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()      
-        fields =  ['username']
+        fields = '__all__'
         
 
 class ProjectSerializer(serializers.ModelSerializer):

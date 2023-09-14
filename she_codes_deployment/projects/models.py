@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.conf import settings
 # from dateutil.relativedelta import relativedelta
 
 # Create your models here.
@@ -45,11 +46,17 @@ class Project(models.Model):
         Category, 
         on_delete=models.CASCADE, null=True)
         # related_name='categorized_projects', null=True)
+    # owner = models.ForeignKey(
+    #     get_user_model(),
+    #     on_delete=models.CASCADE,
+    #     related_name='owned_projects' 
+    # )
+
     owner = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-        related_name='owned_projects' 
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
     )
+
     idol = models.ForeignKey(
         Idol, 
         on_delete=models.CASCADE, null=True) 
