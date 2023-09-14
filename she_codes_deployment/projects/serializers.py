@@ -39,7 +39,7 @@ class OwnerSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     # category=CategorySerializer() #try to display category as a "string" getting error
-    # owner=serializers.ReadOnlyField(source='owner.id')
+    owner=serializers.ReadOnlyField(source='owner.id')
     # idol=serializers.ReadOnlyField(source='idol.name')
     
     class Meta:
