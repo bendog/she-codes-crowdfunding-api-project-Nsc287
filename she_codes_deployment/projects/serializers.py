@@ -33,7 +33,7 @@ class OwnerSerializer(serializers.ModelSerializer):
     owner=serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
-        model = get_user_model(CustomUser)      
+        model = get_user_model('CustomUser')      
         fields =  ['usernmae']
         
 
