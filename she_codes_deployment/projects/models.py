@@ -47,8 +47,8 @@ class Project(models.Model):
         # related_name='categorized_projects', null=True)
     owner = models.ForeignKey(
         get_user_model(),
-        on_delete=models.CASCADE
-        # related_name='owned_projects' 
+        on_delete=models.CASCADE,
+        related_name='owned_projects', 
     )
     idol = models.ForeignKey(
         Idol, 
