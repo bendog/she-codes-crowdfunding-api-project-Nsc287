@@ -19,7 +19,7 @@ class PledgeSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     category=serializers.ReadOnlyField(source='category.id')
     class Meta:
-        model = apps.get_model('projects.Category')
+        model = Category
         fields='__all__'
 
 class IdolSerializer(serializers.ModelSerializer):
