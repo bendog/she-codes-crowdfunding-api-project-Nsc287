@@ -38,7 +38,7 @@ class OwnerSerializer(serializers.ModelSerializer):
         
 
 class ProjectSerializer(serializers.ModelSerializer):
-    owner=OwnerSerializer(many=False, read_only=True)
+    # owner=OwnerSerializer(many=False, read_only=True)
     
     class Meta:
         model = apps.get_model('projects.Project')
