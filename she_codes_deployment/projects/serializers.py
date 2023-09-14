@@ -39,9 +39,9 @@ class OwnerSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     # category=CategorySerializer() #try to display category as a "string" getting error
-    owner=serializers.ReadOnlyField(source='owner.id')
-    # idol=serializers.ReadOnlyField(source='idol.name')
-    
+    owner=OwnerSerializer(many=False, read_only=True)
+    category=CategorySerializer(many=False, read_only=True)
+
     class Meta:
         model = apps.get_model('projects.Project')
         fields = '__all__'
@@ -54,6 +54,7 @@ class ProjectDetailSerializer(ProjectSerializer):
     pledges=PledgeSerializer(many=True, read_only=True)
     idol=IdolSerializer(many=False, read_only=True)
     category=CategorySerializer(many=False, read_only=True)
+    owner=OwnerSerializer(many=False, read_only=True)
 
 # def update(self, instance, validated_data):
 #     instance.title = validated_data.get('title', instance.title)
