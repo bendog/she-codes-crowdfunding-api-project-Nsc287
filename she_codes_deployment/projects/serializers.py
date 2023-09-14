@@ -34,7 +34,8 @@ class OwnerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()      
-        fields = '__all__'
+        fields =  ['usernmae']
+        
 
 class ProjectSerializer(serializers.ModelSerializer):
     # category=CategorySerializer() #try to display category as a "string" getting error
