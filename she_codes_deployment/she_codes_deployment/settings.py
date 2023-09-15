@@ -64,7 +64,8 @@ REST_FRAMEWORK = {
     ]
     }
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'users.CustomUser' 
+# APP's name: users | custom user model name: CustomUser
 
 
 MIDDLEWARE = [
