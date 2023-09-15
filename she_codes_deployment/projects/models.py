@@ -46,16 +46,16 @@ class Project(models.Model):
         Category, 
         on_delete=models.CASCADE, null=True)
         # related_name='categorized_projects', null=True)
-    # owner = models.ForeignKey(
-    #     get_user_model(),
-    #     on_delete=models.CASCADE,
-    #     related_name='owned_projects' 
-    # )
-
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
+        get_user_model(),
+        on_delete=models.CASCADE,
+        related_name='owned_projects' 
     )
+
+    # owner = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE
+    # )
 
     idol = models.ForeignKey(
         Idol, 

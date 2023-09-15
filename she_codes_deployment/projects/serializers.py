@@ -29,18 +29,18 @@ class IdolSerializer(serializers.ModelSerializer):
         model = Idol        #apps.get_model('projects.Idol')
         fields = '__all__'
 
-class CustomUserSerializer(serializers.ModelSerializer):
-    # owner=serializers.ReadOnlyField(source='owner.id')
+class OwnerSerializer(serializers.ModelSerializer):
+    owner=serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
-        model = CustomUser      
-        fields = ('id', 'username', 'email')
+        model = get_user_model()      
+        fields = '__all__'
+        # ('id', 'username', 'email')
         
 
 class ProjectSerializer(serializers.ModelSerializer):
     # category=CategorySerializer() #try to display category as a "string" getting error
-    # owner=serializers.ReadOnlyField(source='owner.id')
-    owner = CustomUserSerializer(read_only=True)
+    owner=serializers.ReadOnlyField(source='owner.id')
     # idol=serializers.ReadOnlyField(source='idol.name')
     
     class Meta:
