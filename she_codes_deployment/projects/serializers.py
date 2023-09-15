@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.apps import apps
-from .models import Reward, Category, Idol
+from .models import Category, Idol, CustomUser, Project
 from django.contrib.auth import get_user_model
 # from users.serializers import ProjectProfileSerializer, IdolSerializer
 
@@ -29,17 +29,18 @@ class IdolSerializer(serializers.ModelSerializer):
         model = Idol        #apps.get_model('projects.Idol')
         fields = '__all__'
 
-class OwnerSerializer(serializers.ModelSerializer):
-    owner=serializers.ReadOnlyField(source='owner.id')
+class CustomUserSerializer(serializers.ModelSerializer):
+    # owner=serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
-        model = get_user_model()      
-        fields = '__all__'
+        model = CustomUser      
+        fields = ('id', 'username', 'email')
         
 
 class ProjectSerializer(serializers.ModelSerializer):
     # category=CategorySerializer() #try to display category as a "string" getting error
-    owner=serializers.ReadOnlyField(source='owner.id')
+    # owner=serializers.ReadOnlyField(source='owner.id')
+    owner = CustomUserSerializer(read_only=True)
     # idol=serializers.ReadOnlyField(source='idol.name')
     
     class Meta:
