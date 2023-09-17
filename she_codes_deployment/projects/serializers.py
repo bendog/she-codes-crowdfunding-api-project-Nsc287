@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.apps import apps
-from .models import Category, Idol, CustomUser, Project
+from .models import Category, Idol
 from django.contrib.auth import get_user_model
 # from users.serializers import ProjectProfileSerializer, IdolSerializer
 
@@ -30,7 +30,7 @@ class IdolSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class OwnerSerializer(serializers.ModelSerializer):
-    owner=serializers.ReadOnlyField(source='owner.id')
+    # owner=serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
         model = get_user_model()      
