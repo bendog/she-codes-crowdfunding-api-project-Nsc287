@@ -38,7 +38,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['*']
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True (Comment out after CORS error)
 CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
 
 
@@ -154,7 +154,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+CORS_ALLOWED_ORIGINS = [
+    # "https://your_front_end_deploy_url.com",
+    "https://meetmyidol.fly.dev",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 
 
 
