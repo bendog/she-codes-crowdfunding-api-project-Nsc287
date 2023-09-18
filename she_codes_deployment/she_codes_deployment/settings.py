@@ -31,11 +31,15 @@ SECRET_KEY = os.environ.get(
 # DEBUG = True
 DEBUG = os.environ.get("DJANGO_DEBUG", "False") != "False"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["*"]
-# CORS_ALLOW_ALL_ORIGINS = True (Comment out after CORS error)
+ALLOWED_HOSTS = ["meetmyidol.fly.dev", "127.0.0.1", "localhost"]
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = [
+#     # "https://your_front_end_deploy_url.com",
+#     "https://meetmyidol.fly.dev",
+#     "http://localhost:5173",
+#     "http://127.0.0.1:5173",
+# ]
 CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev"]
 
 
@@ -43,7 +47,6 @@ CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev"]
 
 INSTALLED_APPS = [
     "projects.apps.ProjectsConfig",
-    "users.apps.UsersConfig",
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
@@ -53,13 +56,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "users.apps.UsersConfig",  # this one must go under the others
 ]
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-    ]
-}
 
 AUTH_USER_MODEL = "users.CustomUser"
 # APP's name: users | custom user model name: CustomUser
@@ -145,15 +143,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOWED_ORIGINS = [
-    # "https://your_front_end_deploy_url.com",
-    "https://meetmyidol.fly.dev",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
